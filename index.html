@@ -78,6 +78,7 @@
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            cursor: pointer; /* Thêm con trỏ để báo hiệu có thể click */
         }
         .gallery-item:hover {
             transform: translateY(-5px);
@@ -200,6 +201,145 @@
                 font-size: 2rem;
             }
         }
+
+        /* Modal (Lightbox) Styles */
+        .image-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .modal-content {
+            position: relative;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            max-height: 80vh; /* Giới hạn chiều cao để thumbnail vừa */
+            background-color: #000; /* Đảm bảo nền đen như hình mẫu */
+            border-radius: 0.75rem;
+            overflow: hidden; /* Cắt nội dung thừa */
+            transform: scale(0.8); /* Bắt đầu nhỏ hơn để zoom in */
+            opacity: 0; /* Bắt đầu ẩn để fade in */
+            animation: zoomIn 0.4s forwards ease-out; /* Thêm hiệu ứng zoom */
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-main-image-container {
+            flex-grow: 1; /* Cho ảnh chính chiếm hết không gian còn lại */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent main image from overflowing */
+        }
+        .modal-main-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Đảm bảo ảnh vừa khung mà không bị cắt */
+            display: block;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001; /* Đảm bảo nút close luôn nằm trên */
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .modal-nav button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .modal-nav button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-thumbnails {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background-color: #222; /* Nền cho thumbnail */
+            gap: 10px;
+            overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều thumbnail */
+            white-space: nowrap;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #888 #555; /* Firefox */
+        }
+        .modal-thumbnails::-webkit-scrollbar {
+            height: 8px;
+        }
+        .modal-thumbnails::-webkit-scrollbar-track {
+            background: #555;
+            border-radius: 10px;
+        }
+        .modal-thumbnails::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        .modal-thumbnail-item {
+            width: 80px;
+            height: 60px;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, border 0.3s ease;
+            flex-shrink: 0; /* Ngăn thumbnail co lại */
+        }
+        .modal-thumbnail-item.active {
+            opacity: 1;
+            border: 2px solid #E96479; /* Màu viền khi active */
+        }
+        .modal-thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -218,36 +358,31 @@
             "Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí."
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+            <!-- 6 ảnh đầu tiên hiển thị mặc định -->
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1" alt="Ảnh cưới 1">
+                <img src="https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1" alt="Ảnh cưới 1" data-full-src="https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2">
+                <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2" data-full-src="https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3" alt="Ảnh cưới 3">
+                <img src="https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3" alt="Ảnh cưới 3" data-full-src="https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4">
+                <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4" data-full-src="https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5" alt="Ảnh cưới 5">
+                <img src="https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5" alt="Ảnh cưới 5" data-full-src="https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6" alt="Ảnh cưới 6">
+                <img src="https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6" alt="Ảnh cưới 6" data-full-src="https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full">
             </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/D1C4E9/FFFFFF?text=Anh+cuoi+7" alt="Ảnh cưới 7">
-            </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/C8A2C8/FFFFFF?text=Anh+cuoi+8" alt="Ảnh cưới 8">
-            </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/B2D8D8/FFFFFF?text=Anh+cuoi+9" alt="Ảnh cưới 9">
-            </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/F0E68C/FFFFFF?text=Anh+cuoi+10" alt="Ảnh cưới 10">
-            </div>
+        </div>
+        <!-- Nút "Xem thêm" -->
+        <div class="text-center mt-8">
+            <button id="showMorePhotosBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg">
+                Xem thêm ảnh
+            </button>
         </div>
     </section>
 
@@ -289,15 +424,10 @@
     <!-- Xác nhận tham gia (RSVP) -->
     <section id="rsvp" class="section">
         <h2 class="section-title">Xác nhận tham gia</h2>
-
-        <p class="text-lg mb-4">
-          Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của chúng mi thêm trọn vẹn và ý nghĩa.
-        </p>
-
         <div class="rsvp-form">
-            <h3 class="font-playfair text-3xl text-center mb-6 text-pink-600">Tell Us if You're Coming!</h3>
+            <h3 class="font-playfair text-3xl text-center mb-6 text-pink-600">Hãy cho chúng mình biết bạn sẽ tham dự!</h3>
             <p class="text-center text-gray-600 mb-8">
-                Kindly RSVP online before July 25th, 2025
+                Vui lòng xác nhận tham gia trực tuyến trước ngày 25 tháng 7 năm 2025
             </p>
             <form id="rsvpForm">
                 <label for="fullName">Tên của bạn:</label>
@@ -327,28 +457,136 @@
 
                 <button type="submit">GỬI XÁC NHẬN</button>
             </form>
+            <!-- Lời Cảm Ơn được chuyển vào đây -->
+            <div class="text-center max-w-2xl mx-auto mt-12">
+                <h3 class="font-playfair text-2xl mb-4 text-pink-600">Lời Cảm Ơn từ Phú Tùng & Quỳnh Anh</h3>
+                <p class="text-lg mb-4">
+                    Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của **chúng mình**.
+                </p>
+                <p class="text-lg mb-4">
+                    Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của **chúng mình** thêm trọn vẹn và ý nghĩa.
+                </p>
+                <p class="text-lg font-semibold">
+                    Xin chân thành cảm ơn!
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- Phần Lời Cảm Ơn -->
-    <section id="thankYouSection" class="section">
-        <h2 class="section-title">Lời Cảm Ơn</h2>
-        <div class="text-center max-w-2xl mx-auto">
-            <p class="text-lg mb-4">
-                Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của chúng con.
-            </p>
-            
-            <p class="text-lg font-semibold">
-                Xin chân thành cảm ơn!
-            </p>
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="image-modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="modal-main-image-container">
+                <img id="modalMainImage" class="modal-main-image" src="" alt="Full size image">
+            </div>
+            <div class="modal-nav">
+                <button onclick="changeImage(-1)">&#10094;</button>
+                <button onclick="changeImage(1)">&#10095;</button>
+            </div>
+            <div id="modalThumbnails" class="modal-thumbnails">
+                <!-- Thumbnails will be populated by JS -->
+            </div>
         </div>
-    </section>
+    </div>
 
     <script>
+        // Global array to store image data (src, alt, full-src)
+        const allImages = [
+            { src: "https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1", alt: "Ảnh cưới 1", fullSrc: "https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full" },
+            { src: "https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2", alt: "Ảnh cưới 2", fullSrc: "https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full" },
+            { src: "https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3", alt: "Ảnh cưới 3", fullSrc: "https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full" },
+            { src: "https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4", alt: "Ảnh cưới 4", fullSrc: "https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full" },
+            { src: "https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5", alt: "Ảnh cưới 5", fullSrc: "https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full" },
+            { src: "https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6", alt: "Ảnh cưới 6", fullSrc: "https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full" },
+            { src: "https://placehold.co/600x400/D1C4E9/FFFFFF?text=Anh+cuoi+7", alt: "Ảnh cưới 7", fullSrc: "https://placehold.co/1200x800/D1C4E9/FFFFFF?text=Anh+cuoi+7_full" },
+            { src: "https://placehold.co/600x400/C8A2C8/FFFFFF?text=Anh+cuoi+8", alt: "Ảnh cưới 8", fullSrc: "https://placehold.co/1200x800/C8A2C8/FFFFFF?text=Anh+cuoi+8_full" },
+            { src: "https://placehold.co/600x400/B2D8D8/FFFFFF?text=Anh+cuoi+9", alt: "Ảnh cưới 9", fullSrc: "https://placehold.co/1200x800/B2D8D8/FFFFFF?text=Anh+cuoi+9_full" },
+            { src: "https://placehold.co/600x400/F0E68C/FFFFFF?text=Anh+cuoi+10", alt: "Ảnh cưới 10", fullSrc: "https://placehold.co/1200x800/F0E68C/FFFFFF?text=Anh+cuoi+10_full" }
+        ];
+
+        let currentImageIndex = 0;
+        const modal = document.getElementById('imageModal');
+        const modalMainImage = document.getElementById('modalMainImage');
+        const modalThumbnailsContainer = document.getElementById('modalThumbnails');
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+
+        // Populate gallery items with data-full-src attributes for initial 6 images
+        galleryItems.forEach((imgElement, index) => {
+            if (index < allImages.length) {
+                imgElement.setAttribute('data-full-src', allImages[index].fullSrc);
+            }
+        });
+
+        // Function to open the modal and display a specific image
+        function openModal(index) {
+            modal.style.display = 'flex';
+            currentImageIndex = index;
+            showImage(currentImageIndex);
+            populateThumbnails();
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Function to show an image in the modal
+        function showImage(index) {
+            if (index >= 0 && index < allImages.length) {
+                modalMainImage.src = allImages[index].fullSrc;
+                modalMainImage.alt = allImages[index].alt;
+
+                // Update active thumbnail
+                const thumbnails = modalThumbnailsContainer.querySelectorAll('.modal-thumbnail-item');
+                thumbnails.forEach((thumb, i) => {
+                    if (i === index) {
+                        thumb.classList.add('active');
+                        // Scroll thumbnail into view if it's not visible
+                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Function to navigate images (next/previous)
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = allImages.length - 1; // Wrap around to end
+            } else if (currentImageIndex >= allImages.length) {
+                currentImageIndex = 0; // Wrap around to start
+            }
+            showImage(currentImageIndex);
+        }
+
+        // Function to populate thumbnails in the modal
+        function populateThumbnails() {
+            modalThumbnailsContainer.innerHTML = ''; // Clear existing thumbnails
+            allImages.forEach((image, index) => {
+                const thumbItem = document.createElement('div');
+                thumbItem.className = 'modal-thumbnail-item';
+                if (index === currentImageIndex) {
+                    thumbItem.classList.add('active');
+                }
+                const thumbImg = document.createElement('img');
+                thumbImg.src = image.src; // Use smaller src for thumbnail
+                thumbImg.alt = image.alt;
+                thumbItem.appendChild(thumbImg);
+                thumbItem.addEventListener('click', () => openModal(index)); // Open modal on thumbnail click
+                modalThumbnailsContainer.appendChild(thumbItem);
+            });
+        }
+
+
         // Hàm thêm vào lịch
         window.addToCalendar = function(eventName, location, dateTime) {
             const date = new Date(dateTime);
-            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format YYYYMMDDTHHMMSSZ
+            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format McClellanMMDDTHHMMSSZ
 
             const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${formattedDate}/${formattedDate}&details=${encodeURIComponent('Sự kiện đám cưới của Phú Tùng & Quỳnh Anh')}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
             window.open(googleCalendarUrl, '_blank');
@@ -374,7 +612,7 @@
                 return;
             }
 
-            // In thông tin ra console để kiểm tra (trong thực tế sẽ gửi đến server)
+            // In thông tin ra console để kiểm tra
             console.log("Thông tin RSVP:");
             console.log("Tên: " + fullName);
             console.log("Số điện thoại: " + phone);
@@ -464,6 +702,39 @@
                 weddingDate.style.opacity = '1';
                 weddingDate.style.transform = 'translateY(0)';
             }, 800);
+
+            // Logic cho nút "Xem thêm ảnh"
+            const showMoreBtn = document.getElementById('showMorePhotosBtn');
+            showMoreBtn.addEventListener('click', () => {
+                openModal(0); // Open modal, starting with the first image
+            });
+
+            // Add click listener to each gallery item to open modal with that image
+            document.querySelectorAll('.gallery-item img').forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    openModal(index);
+                });
+            });
+
+            // Close modal when clicking outside content (but not on content itself)
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Keyboard navigation for modal
+            document.addEventListener('keydown', (event) => {
+                if (modal.style.display === 'flex') { // Only active if modal is open
+                    if (event.key === 'ArrowLeft') {
+                        changeImage(-1);
+                    } else if (event.key === 'ArrowRight') {
+                        changeImage(1);
+                    } else if (event.key === 'Escape') {
+                        closeModal();
+                    }
+                }
+            });
         });
     </script>
 </body>
