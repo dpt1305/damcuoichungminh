@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/leexuvqc/repositories/damcuoichungminh/
+    - /bin/cp index.html $DEPLOYPATH
