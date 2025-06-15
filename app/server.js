@@ -24,7 +24,8 @@ const dbConfig = {
     host: process.env.DB_HOST, // Địa chỉ host của MySQL
     user:  process.env.DB_USER, // Tên người dùng MySQL của bạn
     password:  process.env.DB_PASS, // Mật khẩu MySQL của bạn
-    database:  process.env.DB_DATABASE // Tên database của bạn
+    database:  process.env.DB_DATABASE, // Tên database của bạn
+    charset: 'utf8mb4'
 };
 
 // Hàm để tạo bảng nếu chưa tồn tại
@@ -34,12 +35,12 @@ async function createTable() {
         await connection.execute(`
             CREATE TABLE IF NOT EXISTS wishes (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                fullName VARCHAR(255) NOT NULL,
+                fullName VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL, -- THÊM MÃ HÓA CHO CỘT
                 phone VARCHAR(20),
                 attendance VARCHAR(50),
-                message TEXT,
+                message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- THÊM MÃ HÓA CHO CỘT
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
+            ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; -- THÊM MÃ HÓA CHO BẢNG
         `);
         console.log('Bảng "wishes" đã sẵn sàng hoặc đã được tạo.');
         connection.end();
