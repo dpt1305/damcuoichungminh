@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phú Tùng & Quỳnh Anh - 20 tháng 07, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F5F0; /* Màu trắng ngà */
+            background-color: #F8F5F0;
+            /* Màu trắng ngà */
             color: #333;
             line-height: 1.6;
-            overflow-x: hidden; /* Ngăn cuộn ngang */
+            overflow-x: hidden;
+            /* Ngăn cuộn ngang */
         }
+
         .header-bg {
-            background-image: url('https://placehold.co/1920x700/D4BBAA/FFFFFF?text=Phu+Tung+&+Quynh+Anh+Wedding'); /* Placeholder cho ảnh bìa */
+            background-image: url('https://placehold.co/1920x700/D4BBAA/FFFFFF?text=Phu+Tung+&+Quynh+Anh+Wedding');
+            /* Placeholder cho ảnh bìa */
             background-size: cover;
             background-position: center;
             height: 70vh;
@@ -27,6 +34,7 @@
             color: white;
             position: relative;
         }
+
         .header-bg::before {
             content: '';
             position: absolute;
@@ -34,26 +42,33 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3); /* Lớp phủ tối nhẹ */
+            background-color: rgba(0, 0, 0, 0.3);
+            /* Lớp phủ tối nhẹ */
         }
+
         .header-content {
             z-index: 10;
         }
+
         .header-content h1 {
             font-family: 'Playfair Display', serif;
             font-size: 4.5rem;
             line-height: 1.1;
             margin-bottom: 1rem;
-            opacity: 0; /* Bắt đầu ẩn để tạo hiệu ứng */
-            transform: translateY(20px); /* Bắt đầu từ dưới lên */
+            opacity: 0;
+            /* Bắt đầu ẩn để tạo hiệu ứng */
+            transform: translateY(20px);
+            /* Bắt đầu từ dưới lên */
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
+
         .header-content p {
             font-size: 1.5rem;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
         }
+
         .section {
             padding: 4rem 1rem;
             max-width: 1200px;
@@ -62,33 +77,41 @@
             transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
+
         .section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: #5C4B51; /* Màu chữ tiêu đề */
+            color: #5C4B51;
+            /* Màu chữ tiêu đề */
         }
+
         .gallery-item {
             overflow: hidden;
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
-            cursor: pointer; /* Thêm con trỏ để báo hiệu có thể click */
+            cursor: pointer;
+            /* Thêm con trỏ để báo hiệu có thể click */
         }
+
         .gallery-item:hover {
             transform: translateY(-5px);
         }
+
         .gallery-item img {
             width: 100%;
             height: 300px;
             object-fit: cover;
             display: block;
         }
+
         .event-card {
             background-color: white;
             border-radius: 0.75rem;
@@ -99,29 +122,35 @@
             flex-direction: column;
             gap: 1.5rem;
         }
+
         .event-card img {
             width: 100%;
             height: 250px;
             object-fit: cover;
             border-radius: 0.5rem;
         }
+
         .event-details h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
             color: #5C4B51;
         }
+
         .event-details p {
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
+
         .event-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
+
         .event-buttons button {
-            background-color: #B48D7D; /* Màu nút */
+            background-color: #B48D7D;
+            /* Màu nút */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -130,9 +159,11 @@
             border: none;
             cursor: pointer;
         }
+
         .event-buttons button:hover {
             background-color: #A37C6C;
         }
+
         .rsvp-form {
             background-color: white;
             border-radius: 0.75rem;
@@ -141,12 +172,14 @@
             max-width: 700px;
             margin: 2rem auto;
         }
+
         .rsvp-form label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: #5C4B51;
         }
+
         .rsvp-form input[type="text"],
         .rsvp-form input[type="email"],
         .rsvp-form input[type="tel"],
@@ -158,21 +191,26 @@
             border-radius: 0.5rem;
             box-sizing: border-box;
         }
+
         .rsvp-form .radio-group {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
+
         .rsvp-form .radio-group div {
             display: flex;
             align-items: center;
         }
+
         .rsvp-form .radio-group input[type="radio"] {
             margin-right: 0.5rem;
         }
+
         .rsvp-form button[type="submit"] {
-            background-color: #E96479; /* Màu hồng tương tự ảnh */
+            background-color: #E96479;
+            /* Màu hồng tương tự ảnh */
             color: white;
             padding: 1rem 2rem;
             border-radius: 0.5rem;
@@ -183,6 +221,7 @@
             width: 100%;
             transition: background-color 0.3s ease;
         }
+
         .rsvp-form button[type="submit"]:hover {
             background-color: #D4546B;
         }
@@ -194,9 +233,11 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
             }
+
             .header-content h1 {
                 font-size: 6rem;
             }
+
             .header-content p {
                 font-size: 2rem;
             }
@@ -204,19 +245,27 @@
 
         /* Modal (Lightbox) Styles */
         .image-modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1000;
+            /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
+
         .modal-content {
             position: relative;
             margin: auto;
@@ -225,13 +274,19 @@
             width: 90%;
             height: 90%;
             max-width: 1200px;
-            max-height: 80vh; /* Giới hạn chiều cao để thumbnail vừa */
-            background-color: #000; /* Đảm bảo nền đen như hình mẫu */
+            max-height: 80vh;
+            /* Giới hạn chiều cao để thumbnail vừa */
+            background-color: #000;
+            /* Đảm bảo nền đen như hình mẫu */
             border-radius: 0.75rem;
-            overflow: hidden; /* Cắt nội dung thừa */
-            transform: scale(0.8); /* Bắt đầu nhỏ hơn để zoom in */
-            opacity: 0; /* Bắt đầu ẩn để fade in */
-            animation: zoomIn 0.4s forwards ease-out; /* Thêm hiệu ứng zoom */
+            overflow: hidden;
+            /* Cắt nội dung thừa */
+            transform: scale(0.8);
+            /* Bắt đầu nhỏ hơn để zoom in */
+            opacity: 0;
+            /* Bắt đầu ẩn để fade in */
+            animation: zoomIn 0.4s forwards ease-out;
+            /* Thêm hiệu ứng zoom */
         }
 
         @keyframes zoomIn {
@@ -239,6 +294,7 @@
                 transform: scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -246,18 +302,23 @@
         }
 
         .modal-main-image-container {
-            flex-grow: 1; /* Cho ảnh chính chiếm hết không gian còn lại */
+            flex-grow: 1;
+            /* Cho ảnh chính chiếm hết không gian còn lại */
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevent main image from overflowing */
+            overflow: hidden;
+            /* Prevent main image from overflowing */
         }
+
         .modal-main-image {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Đảm bảo ảnh vừa khung mà không bị cắt */
+            object-fit: contain;
+            /* Đảm bảo ảnh vừa khung mà không bị cắt */
             display: block;
         }
+
         .modal-close {
             position: absolute;
             top: 15px;
@@ -267,14 +328,17 @@
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
-            z-index: 1001; /* Đảm bảo nút close luôn nằm trên */
+            z-index: 1001;
+            /* Đảm bảo nút close luôn nằm trên */
         }
+
         .modal-close:hover,
         .modal-close:focus {
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
         }
+
         .modal-nav {
             position: absolute;
             top: 50%;
@@ -286,6 +350,7 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+
         .modal-nav button {
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
@@ -296,31 +361,41 @@
             border-radius: 0.5rem;
             transition: background-color 0.3s ease;
         }
+
         .modal-nav button:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+
         .modal-thumbnails {
             display: flex;
             justify-content: center;
             padding: 10px 0;
-            background-color: #222; /* Nền cho thumbnail */
+            background-color: #222;
+            /* Nền cho thumbnail */
             gap: 10px;
-            overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều thumbnail */
+            overflow-x: auto;
+            /* Cho phép cuộn ngang nếu nhiều thumbnail */
             white-space: nowrap;
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: #888 #555; /* Firefox */
+            scrollbar-width: thin;
+            /* Firefox */
+            scrollbar-color: #888 #555;
+            /* Firefox */
         }
+
         .modal-thumbnails::-webkit-scrollbar {
             height: 8px;
         }
+
         .modal-thumbnails::-webkit-scrollbar-track {
             background: #555;
             border-radius: 10px;
         }
+
         .modal-thumbnails::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 10px;
         }
+
         .modal-thumbnail-item {
             width: 80px;
             height: 60px;
@@ -329,12 +404,16 @@
             cursor: pointer;
             opacity: 0.6;
             transition: opacity 0.3s ease, border 0.3s ease;
-            flex-shrink: 0; /* Ngăn thumbnail co lại */
+            flex-shrink: 0;
+            /* Ngăn thumbnail co lại */
         }
+
         .modal-thumbnail-item.active {
             opacity: 1;
-            border: 2px solid #E96479; /* Màu viền khi active */
+            border: 2px solid #E96479;
+            /* Màu viền khi active */
         }
+
         .modal-thumbnail-item img {
             width: 100%;
             height: 100%;
@@ -346,6 +425,7 @@
             background-color: #F8F5F0;
             padding: 4rem 1rem;
         }
+
         .wishes-container {
             max-width: 800px;
             margin: 0 auto;
@@ -354,22 +434,26 @@
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .wish-item {
             background-color: #f9f9f9;
             padding: 1.5rem;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+
         .wish-item:last-child {
             margin-bottom: 0;
         }
+
         .wish-item .name {
             font-weight: 600;
             color: #5C4B51;
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
+
         .wish-item .message {
             font-style: italic;
             color: #333;
@@ -377,6 +461,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Phần tiêu đề -->
     <header class="header-bg">
@@ -395,27 +480,34 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
             <!-- 6 ảnh đầu tiên hiển thị mặc định -->
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1" alt="Ảnh cưới 1" data-full-src="https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full">
+                <img src="https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1" alt="Ảnh cưới 1"
+                    data-full-src="https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2" data-full-src="https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full">
+                <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2"
+                    data-full-src="https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3" alt="Ảnh cưới 3" data-full-src="https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full">
+                <img src="https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3" alt="Ảnh cưới 3"
+                    data-full-src="https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4" data-full-src="https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full">
+                <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4"
+                    data-full-src="https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5" alt="Ảnh cưới 5" data-full-src="https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full">
+                <img src="https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5" alt="Ảnh cưới 5"
+                    data-full-src="https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full">
             </div>
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6" alt="Ảnh cưới 6" data-full-src="https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full">
+                <img src="https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6" alt="Ảnh cưới 6"
+                    data-full-src="https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full">
             </div>
         </div>
         <!-- Nút "Xem thêm" -->
         <div class="text-center mt-8">
-            <button id="showMorePhotosBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg">
+            <button id="showMorePhotosBtn"
+                class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg">
                 Xem thêm ảnh
             </button>
         </div>
@@ -433,10 +525,15 @@
                 <div class="event-details">
                     <h3>TIỆC CƯỚI NHÀ TRAI</h3>
                     <p><strong>Thời gian:</strong> 17:00 19/07/2025 (tức ngày 25 tháng 6 âm lịch)</p>
-                    <p><strong>Địa điểm:</strong> Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội</p>
+                    <p><strong>Địa điểm:</strong> Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội
+                    </p>
                     <div class="event-buttons">
-                        <button onclick="addToCalendar('Nhà trai', 'Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm vào lịch</button>
-                        <button onclick="viewMap('Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội')">Xem bản đồ</button>
+                        <button
+                            onclick="addToCalendar('Nhà trai', 'Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm
+                            vào lịch</button>
+                        <button
+                            onclick="viewMap('Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội')">Xem
+                            bản đồ</button>
                     </div>
                 </div>
             </div>
@@ -448,8 +545,11 @@
                     <p><strong>Thời gian:</strong> 17:00 19/07/2025 (tức ngày 25 tháng 6 âm lịch)</p>
                     <p><strong>Địa điểm:</strong> Nhà văn hoá, thôn Lai Xá, Kim Chung, Hoài Đức, Hà Nội</p>
                     <div class="event-buttons">
-                        <button onclick="addToCalendar('Nhà gái', 'Nhà văn hoá, thôn Lai Xá, Kim Chung, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm vào lịch</button>
-                        <button onclick="viewMap('Nhà văn hoá, thôn Lai Xá, Kim Chung, Hoài Đức, Hà Nội')">Xem bản đồ</button>
+                        <button
+                            onclick="addToCalendar('Nhà gái', 'Nhà văn hoá, thôn Lai Xá, Kim Chung, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm
+                            vào lịch</button>
+                        <button onclick="viewMap('Nhà văn hoá, thôn Lai Xá, Kim Chung, Hoài Đức, Hà Nội')">Xem bản
+                            đồ</button>
                     </div>
                 </div>
             </div>
@@ -460,9 +560,10 @@
     <section id="rsvp" class="section">
         <h2 class="section-title">Xác nhận tham gia</h2>
         <div class="rsvp-form">
-            <h3 class="font-playfair text-3xl text-center mb-6 text-pink-600">Hãy cho chúng mình biết bạn sẽ tham dự!</h3>
+            <h3 class="font-playfair text-3xl text-center mb-6 text-pink-600">Hãy cho chúng mình biết bạn sẽ tham dự!
+            </h3>
             <p class="text-center text-gray-600 mb-8">
-                Vui lòng xác nhận tham gia trực tuyến trước ngày 25 tháng 7 năm 2025
+                Vui lòng xác nhận tham gia trực tuyến trước ngày 18 tháng 7 năm 2025
             </p>
             <form id="rsvpForm">
                 <label for="fullName">Tên của bạn:</label>
@@ -488,7 +589,8 @@
                 </div>
 
                 <label for="message">Lời chúc:</label>
-                <textarea id="message" name="message" rows="5" placeholder="Gửi lời chúc tốt đẹp nhất của bạn..."></textarea>
+                <textarea id="message" name="message" rows="5"
+                    placeholder="Gửi lời chúc tốt đẹp nhất của bạn..."></textarea>
 
                 <button type="submit">GỬI XÁC NHẬN</button>
             </form>
@@ -509,10 +611,12 @@
         <h2 class="section-title">Lời Cảm Ơn</h2>
         <div class="text-center max-w-2xl mx-auto">
             <p class="text-lg mb-4">
-                Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của **chúng con**.
+                Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian
+                đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của **chúng con**.
             </p>
             <p class="text-lg mb-4">
-                Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của **chúng con** thêm trọn vẹn và ý nghĩa.
+                Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của **chúng con**
+                thêm trọn vẹn và ý nghĩa.
             </p>
             <p class="text-lg font-semibold">
                 Xin chân thành cảm ơn!
@@ -540,7 +644,7 @@
     <script>
         // Backend URL
         const beURL = 'https://server.damcuoichungminh.site';
-        
+
         // Global array to store image data (src, alt, full-src)
         const allImages = [
             { src: "https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1", alt: "Ảnh cưới 1", fullSrc: "https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full" },
@@ -634,7 +738,7 @@
 
 
         // Hàm thêm vào lịch
-        window.addToCalendar = function(eventName, location, dateTime) {
+        window.addToCalendar = function (eventName, location, dateTime) {
             const date = new Date(dateTime);
             const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format McClellanMMDDTHHMMSSZ
 
@@ -643,7 +747,7 @@
         };
 
         // Hàm xem bản đồ
-        window.viewMap = function(address) {
+        window.viewMap = function (address) {
             const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
             window.open(googleMapsUrl, '_blank');
         };
@@ -661,7 +765,7 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const wishes = await response.json();
-                
+
                 wishesContainer.innerHTML = ''; // Clear existing wishes
                 if (wishes.length === 0) {
                     wishesContainer.innerHTML = '<p class="text-center text-gray-500">Chưa có lời chúc nào.</p>';
@@ -683,16 +787,55 @@
         }
 
         // Xử lý form RSVP
-        document.getElementById('rsvpForm').addEventListener('submit', async function(event) {
+        document.getElementById('rsvpForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Ngăn chặn form gửi đi mặc định
 
-            const fullName = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
-            const message = document.getElementById('message').value;
+            const fullNameInput = document.getElementById('fullName');
+            const phoneInput = document.getElementById('phone');
+            const messageInput = document.getElementById('message');
+            const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
 
-            if (!attendance) {
+            const fullName = fullNameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const message = messageInput.value.trim();
+            let attendance = '';
+
+            // Validate fullName
+            if (fullName === '') {
+                alert("Vui lòng nhập tên của bạn.");
+                fullNameInput.focus();
+                return;
+            }
+
+            // Validate phone (optional but if provided, must be valid)
+            if (phone !== '') {
+                // Regex for Vietnamese phone numbers (0XXXXXXXXX or +84XXXXXXXXX)
+                const phoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+                if (!phoneRegex.test(phone)) {
+                    alert("Số điện thoại không đúng định dạng. Vui lòng nhập 10 số (bắt đầu bằng 0) hoặc định dạng +84 (ví dụ: +84901234567).");
+                    phoneInput.focus();
+                    return;
+                }
+            }
+
+            // Validate attendance radio buttons
+            let attendanceSelected = false;
+            for (const radio of attendanceRadios) {
+                if (radio.checked) {
+                    attendance = radio.value;
+                    attendanceSelected = true;
+                    break;
+                }
+            }
+            if (!attendanceSelected) {
                 alert("Vui lòng chọn bạn sẽ tham dự tiệc cưới nhà trai hay nhà gái.");
+                return;
+            }
+
+            // Validate message
+            if (message === '') {
+                alert("Vui lòng nhập lời chúc của bạn.");
+                messageInput.focus();
                 return;
             }
 
@@ -723,7 +866,7 @@
         });
 
         // Thay thế alert bằng một modal hoặc popup đẹp hơn
-        window.alert = function(message) {
+        window.alert = function (message) {
             const alertBox = document.createElement('div');
             alertBox.style.position = 'fixed';
             alertBox.style.top = '50%';
@@ -839,4 +982,5 @@
         });
     </script>
 </body>
+
 </html>
