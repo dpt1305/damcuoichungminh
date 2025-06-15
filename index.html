@@ -340,6 +340,41 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Styling for Wishes section */
+        #wishesSection {
+            background-color: #F8F5F0;
+            padding: 4rem 1rem;
+        }
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .wish-item {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .wish-item:last-child {
+            margin-bottom: 0;
+        }
+        .wish-item .name {
+            font-weight: 600;
+            color: #5C4B51;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .wish-item .message {
+            font-style: italic;
+            color: #333;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -457,19 +492,31 @@
 
                 <button type="submit">GỬI XÁC NHẬN</button>
             </form>
-            <!-- Lời Cảm Ơn được chuyển vào đây -->
-            <div class="text-center max-w-2xl mx-auto mt-12">
-                <h3 class="font-playfair text-2xl mb-4 text-pink-600">Lời Cảm Ơn từ Phú Tùng & Quỳnh Anh</h3>
-                <p class="text-lg mb-4">
-                    Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của **chúng mình**.
-                </p>
-                <p class="text-lg mb-4">
-                    Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của **chúng mình** thêm trọn vẹn và ý nghĩa.
-                </p>
-                <p class="text-lg font-semibold">
-                    Xin chân thành cảm ơn!
-                </p>
-            </div>
+        </div>
+    </section>
+
+    <!-- Phần hiển thị Lời chúc từ khách mời -->
+    <section id="wishesSection" class="section">
+        <h2 class="section-title">Lời Chúc từ Khách Mời</h2>
+        <div class="wishes-container" id="wishesContainer">
+            <!-- Lời chúc sẽ được tải ở đây -->
+            <p class="text-center text-gray-500">Đang tải lời chúc...</p>
+        </div>
+    </section>
+
+    <!-- Phần Lời Cảm Ơn -->
+    <section id="thankYouSection" class="section">
+        <h2 class="section-title">Lời Cảm Ơn</h2>
+        <div class="text-center max-w-2xl mx-auto">
+            <p class="text-lg mb-4">
+                Phú Tùng và Quỳnh Anh xin gửi lời cảm ơn chân thành nhất đến tất cả quý vị khách quý đã dành thời gian đến chung vui và gửi gắm những lời chúc tốt đẹp trong ngày trọng đại của **chúng con**.
+            </p>
+            <p class="text-lg mb-4">
+                Sự hiện diện và tình cảm của mọi người là món quà vô giá, góp phần làm cho ngày cưới của **chúng con** thêm trọn vẹn và ý nghĩa.
+            </p>
+            <p class="text-lg font-semibold">
+                Xin chân thành cảm ơn!
+            </p>
         </div>
     </section>
 
@@ -491,6 +538,9 @@
     </div>
 
     <script>
+        // Backend URL
+        const beURL = 'https://server.damcuoichungminh.site';
+        
         // Global array to store image data (src, alt, full-src)
         const allImages = [
             { src: "https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1", alt: "Ảnh cưới 1", fullSrc: "https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full" },
@@ -598,8 +648,42 @@
             window.open(googleMapsUrl, '_blank');
         };
 
+        // Hàm tải lời chúc từ backend
+        async function fetchWishes() {
+            const wishesContainer = document.getElementById('wishesContainer');
+            if (!wishesContainer) return; // Ensure the element exists
+
+            wishesContainer.innerHTML = '<p class="text-center text-gray-500">Đang tải lời chúc...</p>';
+            try {
+                // Thay thế bằng URL API của bạn để lấy lời chúc
+                const response = await fetch(`${beURL}/api/wishes`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const wishes = await response.json();
+                
+                wishesContainer.innerHTML = ''; // Clear existing wishes
+                if (wishes.length === 0) {
+                    wishesContainer.innerHTML = '<p class="text-center text-gray-500">Chưa có lời chúc nào.</p>';
+                } else {
+                    wishes.forEach(wish => {
+                        const wishElement = document.createElement('div');
+                        wishElement.className = 'wish-item';
+                        wishElement.innerHTML = `
+                            <p class="name">${wish.fullName || 'Ẩn danh'}:</p>
+                            <p class="message">${wish.message || 'Không có lời chúc.'}</p>
+                        `;
+                        wishesContainer.appendChild(wishElement);
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching wishes:", error);
+                wishesContainer.innerHTML = '<p class="text-center text-red-500">Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
+            }
+        }
+
         // Xử lý form RSVP
-        document.getElementById('rsvpForm').addEventListener('submit', function(event) {
+        document.getElementById('rsvpForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Ngăn chặn form gửi đi mặc định
 
             const fullName = document.getElementById('fullName').value;
@@ -612,16 +696,30 @@
                 return;
             }
 
-            // In thông tin ra console để kiểm tra
-            console.log("Thông tin RSVP:");
-            console.log("Tên: " + fullName);
-            console.log("Số điện thoại: " + phone);
-            console.log("Tham dự: " + attendance);
-            console.log("Lời chúc: " + message);
+            try {
+                // Gửi dữ liệu đến backend Node.js
+                const response = await fetch(`${beURL}/api/rsvp`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ fullName, phone, attendance, message })
+                });
 
-            // Hiển thị thông báo thành công (thay thế alert)
-            alert("Cảm ơn bạn đã xác nhận tham gia! Thông tin của bạn đã được gửi thành công.");
-            this.reset(); // Reset form after successful submission
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("Backend response:", result);
+
+                alert("Cảm ơn bạn đã xác nhận tham gia! Thông tin của bạn đã được gửi thành công.");
+                this.reset(); // Reset form after successful submission
+                fetchWishes(); // Tải lại lời chúc sau khi gửi thành công
+            } catch (error) {
+                console.error("Error submitting RSVP:", error);
+                alert("Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại.");
+            }
         });
 
         // Thay thế alert bằng một modal hoặc popup đẹp hơn
@@ -735,6 +833,9 @@
                     }
                 }
             });
+
+            // Fetch wishes when page loads
+            fetchWishes();
         });
     </script>
 </body>
