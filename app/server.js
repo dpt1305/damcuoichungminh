@@ -12,7 +12,7 @@ const port = 3000; // Cổng cho backend API
 // Cấu hình CORS để cho phép frontend của bạn truy cập API
 // Trong môi trường sản phẩm, bạn nên chỉ định rõ origin của frontend.
 app.use(cors({
-    origin: 'https://damcuoichungminh.site' // Thay thế bằng địa chỉ frontend của bạn khi deploy
+    origin: 'https://damcuoichungminh.site/' // Thay thế bằng địa chỉ frontend của bạn khi deploy
 }));
 
 // Sử dụng body-parser để phân tích cú pháp JSON trong request body
