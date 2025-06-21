@@ -248,7 +248,7 @@
 
             /* Loại bỏ chiều cao cố định cho ảnh trong gallery-item trên desktop */
             /* .gallery-item img {
-                height: 300px;
+                height: 300px; 
             } */
 
             .event-card {
@@ -370,13 +370,13 @@
             /* Prevent main image from overflowing */
         }
 
-        /* Loại bỏ các style cứng cho img trong modal nếu dùng <picture> */
-        /* .modal-main-image {
+        .modal-main-image {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            /* Đảm bảo ảnh vừa khung mà không bị cắt */
             display: block;
-        } */
+        }
 
         .modal-close {
             position: absolute;
@@ -574,29 +574,21 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
             <!-- 4 ảnh đầu tiên hiển thị mặc định -->
             <div class="gallery-item relative aspect-[3/2]">
-                <!-- Không áp dụng lazy load cho 4 ảnh đầu tiên -->
-                <img class="absolute inset-0 w-full h-full object-cover" 
-                     src="https://dhqeni7i912kw.cloudfront.net/crop/imag1_crop.jpg" 
-                     alt="Ảnh cưới 1"
-                     data-full-src="https://dhqeni7i912kw.cloudfront.net/DSC00317.jpg">
+                <!-- Sử dụng ảnh DSC00317.jpg. Lý tưởng nhất là ảnh này nên được cắt và tối ưu hóa trước thành 600x400px để tải nhanh và hiển thị tốt nhất -->
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/thumbnails/tn_imag1_crop.jpg" alt="Ảnh cưới 1"
+                    data-full-src="image/thumbnails/tn_DSC00317.jpg">
             </div>
             <div class="gallery-item relative aspect-[3/2]">
-                <img class="absolute inset-0 w-full h-full object-cover" 
-                     src="https://dhqeni7i912kw.cloudfront.net/crop/image2_crop.jpg" 
-                     alt="Ảnh cưới 2"
-                     data-full-src="https://dhqeni7i912kw.cloudfront.net/DSC00514.jpg">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/thumbnails/tn_image2_crop.jpg" alt="Ảnh cưới 2"
+                    data-full-src="image/thumbnails/tn_DSC00514.jpg">
             </div>
             <div class="gallery-item relative aspect-[3/2]">
-                <img class="absolute inset-0 w-full h-full object-cover" 
-                     src="https://dhqeni7i912kw.cloudfront.net/crop/image3_crop.jpg" 
-                     alt="Ảnh cưới 3"
-                     data-full-src="https://dhqeni7i912kw.cloudfront.net/DSC01159.jpg">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/thumbnails/tn_image3_crop.jpg" alt="Ảnh cưới 3"
+                    data-full-src="image/thumbnails/tn_DSC01159.jpg">
             </div>
             <div class="gallery-item relative aspect-[3/2]">
-                <img class="absolute inset-0 w-full h-full object-cover" 
-                     src="https://dhqeni7i912kw.cloudfront.net/crop/image4_crop.jpg" 
-                     alt="Ảnh cưới 4"
-                     data-full-src="https://dhqeni7i912kw.cloudfront.net/DSC00818.JPG">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/thumbnails/tn_image4_crop.jpg" alt="Ảnh cưới 4"
+                    data-full-src="image/thumbnails/tn_DSC00818.JPG">
             </div>
             <!-- Dynamic additional images can be added here if needed -->
         </div>
@@ -617,7 +609,7 @@
         </p>
         <div class="event-section-content">
             <div class="event-card">
-                <img src="https://placehold.co/600x300/D4BBAA/FFFFFF?text=Tiecp1" alt="Tiệc cưới nhà trai" loading="lazy">
+                <img src="https://placehold.co/600x300/D4BBAA/FFFFFF?text=Tiecp1" alt="Tiệc cưới nhà trai">
                 <div class="event-details">
                     <h3>TIỆC CƯỚI NHÀ TRAI</h3>
                     <p><strong>Thời gian:</strong> 17:00 19/07/2025 (tức ngày 25 tháng 6 âm lịch)</p>
@@ -635,7 +627,7 @@
             </div>
 
             <div class="event-card">
-                <img src="https://placehold.co/600x300/C5D8CD/FFFFFF?text=Tiecp2" alt="Tiệc cưới nhà gái" loading="lazy">
+                <img src="https://placehold.co/600x300/C5D8CD/FFFFFF?text=Tiecp2" alt="Tiệc cưới nhà gái">
                 <div class="event-details">
                     <h3>TIỆC CƯỚI NHÀ GÁI</h3>
                     <p><strong>Thời gian:</strong> 17:00 19/07/2025 (tức ngày 25 tháng 6 âm lịch)</p>
@@ -739,21 +731,21 @@
 
     <script>
         // Backend URL (replace with your actual backend URL)
-        const beURL = 'https://server.damcuocuchungminh.site';
+        const beURL = 'https://server.damcuoichungminh.site';
 
         // Global array to store image data (src, alt, full-src)
         const allImages = [
             // Thay đổi tại đây: Sử dụng hình ảnh DSC00317.jpg cho thumbnail đầu tiên
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/imag1_crop.jpg", alt: "Ảnh cưới 1", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00317.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image2_crop.jpg", alt: "Ảnh cưới 2", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00514.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image3_crop.jpg", alt: "Ảnh cưới 3", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC01159.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image4_crop.jpg", alt: "Ảnh cưới 4", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00818.JPG" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/imag1_crop.jpg", alt: "Ảnh cưới 5", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00763.JPG" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image2_crop.jpg", alt: "Ảnh cưới 6", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00674.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image3_crop.jpg", alt: "Ảnh cưới 7", fullSrc: "https://dhqeni7i912kw.cloudfront.net/DSC00852.JPG" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image4_crop.jpg", alt: "Ảnh cưới 8", fullSrc: "https://dhqeni7i912kw.cloudfront.net/F (114.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/imag1_crop.jpg", alt: "Ảnh cưới 9", fullSrc: "https://dhqeni7i912kw.cloudfront.net/F (63)fix.jpg" },
-            { src: "https://dhqeni7i912kw.cloudfront.net/crop/image2_crop.jpg", alt: "Ảnh cưới 10", fullSrc: "https://dhqeni7i912kw.cloudfront.net/F (159).jpg" }
+            { src: "image/crop/thumbnails/tn_imag1_crop.jpg", alt: "Ảnh cưới 1", fullSrc: "image/thumbnails/tn_DSC00317.jpg" },
+            { src: "image/crop/thumbnails/tn_image2_crop.jpg", alt: "Ảnh cưới 2", fullSrc: "image/thumbnails/tn_DSC00514.jpg" },
+            { src: "image/crop/thumbnails/tn_image3_crop.jpg", alt: "Ảnh cưới 3", fullSrc: "image/thumbnails/tn_DSC01159.jpg" },
+            { src: "image/crop/thumbnails/tn_image4_crop.jpg", alt: "Ảnh cưới 4", fullSrc: "image/thumbnails/tn_DSC00818.JPG" },
+            { src: "image/thumbnails/tn_DSC00763.JPG", alt: "Ảnh cưới 5", fullSrc: "image/thumbnails/tn_DSC00763.JPG" },
+            { src: "image/thumbnails/tn_DSC00674.jpg", alt: "Ảnh cưới 6", fullSrc: "image/thumbnails/tn_DSC00674.jpg" },
+            { src: "image/thumbnails/tn_DSC00852.JPG", alt: "Ảnh cưới 7", fullSrc: "image/thumbnails/tn_DSC00852.JPG" },
+            { src: "image/thumbnails/tn_F (114.jpg", alt: "Ảnh cưới 8", fullSrc: "image/thumbnails/tn_F (114.jpg" },
+            { src: "image/thumbnails/tn_F (63)fix.jpg", alt: "Ảnh cưới 10", fullSrc: "image/thumbnails/tn_F (63)fix.jpg" },
+            { src: "image/thumbnails/tn_F (159).jpg", alt: "Ảnh cưới 9", fullSrc: "image/thumbnails/tn_F (159).jpg" },
             
         ];
 
@@ -761,16 +753,11 @@
         const modal = document.getElementById('imageModal');
         const modalMainImage = document.getElementById('modalMainImage');
         const modalThumbnailsContainer = document.getElementById('modalThumbnails');
-        
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+
         // Populate gallery items with data-full-src attributes for initial 6 images
-        document.querySelectorAll('.gallery-item img').forEach((imgElement, index) => {
+        galleryItems.forEach((imgElement, index) => {
             if (index < allImages.length) {
-                // Remove lazy loading from the first 4 images that are immediately visible
-                if (index < 4) {
-                    imgElement.removeAttribute('loading');
-                } else {
-                    imgElement.setAttribute('loading', 'lazy');
-                }
                 imgElement.setAttribute('data-full-src', allImages[index].fullSrc);
             }
         });
@@ -780,7 +767,7 @@
             modal.style.display = 'flex';
             currentImageIndex = index;
             showImage(currentImageIndex);
-            populateThumbnails(); // Thumbnails will be populated without lazy loading in modal
+            populateThumbnails();
             document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
         }
 
@@ -795,7 +782,6 @@
             if (index >= 0 && index < allImages.length) {
                 modalMainImage.src = allImages[index].fullSrc;
                 modalMainImage.alt = allImages[index].alt;
-                modalMainImage.removeAttribute('loading'); // Ensure main modal image is not lazy-loaded
 
                 // Update active thumbnail
                 const thumbnails = modalThumbnailsContainer.querySelectorAll('.modal-thumbnail-item');
@@ -834,7 +820,6 @@
                 const thumbImg = document.createElement('img');
                 thumbImg.src = image.src; // Use smaller src for thumbnail
                 thumbImg.alt = image.alt;
-                thumbImg.removeAttribute('loading'); // Ensure thumbnails in modal are not lazy-loaded
                 thumbItem.appendChild(thumbImg);
                 thumbItem.addEventListener('click', () => openModal(index)); // Open modal on thumbnail click
                 modalThumbnailsContainer.appendChild(thumbItem);
@@ -845,7 +830,7 @@
         // Hàm thêm vào lịch
         window.addToCalendar = function (eventName, location, dateTime) {
             const date = new Date(dateTime);
-            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format YYYYMMDDTHHMMSSZ
+            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format McClellanMMDDTHHMMSSZ
 
             const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${formattedDate}/${formattedDate}&details=${encodeURIComponent('Sự kiện đám cưới của Phú Tùng & Quỳnh Anh')}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
             window.open(googleCalendarUrl, '_blank');
