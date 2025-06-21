@@ -83,15 +83,6 @@
             transform: translateY(0);
         }
 
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem; /* Tối ưu hóa cho mobile */
-            text-align: center;
-            margin-bottom: 2rem; /* Giảm margin cho mobile */
-            color: #5C4B51;
-            /* Màu chữ tiêu đề */
-        }
-
         .gallery-item {
             overflow: hidden;
             border-radius: 0.75rem;
@@ -105,9 +96,8 @@
             transform: translateY(-5px);
         }
 
+        /* Loại bỏ chiều cao cố định cho ảnh trong gallery-item vì sẽ dùng aspect ratio của Tailwind */
         .gallery-item img {
-            width: 100%;
-            height: 250px; /* Điều chỉnh chiều cao ảnh cho mobile */
             object-fit: cover;
             display: block;
         }
@@ -256,9 +246,10 @@
                 margin-bottom: 3rem;
             }
 
-            .gallery-item img {
-                height: 300px; /* Khôi phục chiều cao ảnh cho desktop */
-            }
+            /* Loại bỏ chiều cao cố định cho ảnh trong gallery-item trên desktop */
+            /* .gallery-item img {
+                height: 300px; 
+            } */
 
             .event-card {
                 padding: 2rem;
@@ -582,21 +573,22 @@
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
             <!-- 4 ảnh đầu tiên hiển thị mặc định -->
-            <div class="gallery-item">
-                <img src="image/crop/F (5).jpg" alt="Ảnh cưới 1"
-                    data-full-src="image/F (5).jpg">
+            <div class="gallery-item relative aspect-[3/2]">
+                <!-- Sử dụng ảnh DSC00317.jpg. Lý tưởng nhất là ảnh này nên được cắt và tối ưu hóa trước thành 600x400px để tải nhanh và hiển thị tốt nhất -->
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/imag1_crop.jpg" alt="Ảnh cưới 1"
+                    data-full-src="image/DSC00317.jpg">
             </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2"
-                    data-full-src="https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full">
+            <div class="gallery-item relative aspect-[3/2]">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/image2_crop.jpg" alt="Ảnh cưới 2"
+                    data-full-src="image/DSC00514.jpg">
             </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3" alt="Ảnh cưới 3"
-                    data-full-src="https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full">
+            <div class="gallery-item relative aspect-[3/2]">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/image3_crop.jpg" alt="Ảnh cưới 3"
+                    data-full-src="image/DSC01159.jpg">
             </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4"
-                    data-full-src="https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full">
+            <div class="gallery-item relative aspect-[3/2]">
+                <img class="absolute inset-0 w-full h-full object-cover" src="image/crop/image4_crop.jpg" alt="Ảnh cưới 4"
+                    data-full-src="image/DSC00818.JPG">
             </div>
             <!-- Dynamic additional images can be added here if needed -->
         </div>
@@ -743,16 +735,18 @@
 
         // Global array to store image data (src, alt, full-src)
         const allImages = [
-            { src: "image/crop/F (5).jpg", alt: "Ảnh cưới 1", fullSrc: "image/F (5).jpg" },
-            { src: "https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2", alt: "Ảnh cưới 2", fullSrc: "https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full" },
-            { src: "https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3", alt: "Ảnh cưới 3", fullSrc: "https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full" },
-            { src: "https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4", alt: "Ảnh cưới 4", fullSrc: "https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full" },
-            { src: "https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5", alt: "Ảnh cưới 5", fullSrc: "https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full" },
-            { src: "https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6", alt: "Ảnh cưới 6", fullSrc: "https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full" },
-            { src: "https://placehold.co/600x400/D1C4E9/FFFFFF?text=Anh+cuoi+7", alt: "Ảnh cưới 7", fullSrc: "https://placehold.co/1200x800/D1C4E9/FFFFFF?text=Anh+cuoi+7_full" },
-            { src: "https://placehold.co/600x400/C8A2C8/FFFFFF?text=Anh+cuoi+8", alt: "Ảnh cưới 8", fullSrc: "https://placehold.co/1200x800/C8A2C8/FFFFFF?text=Anh+cuoi+8_full" },
-            { src: "https://placehold.co/600x400/B2D8D8/FFFFFF?text=Anh+cuoi+9", alt: "Ảnh cưới 9", fullSrc: "https://placehold.co/1200x800/B2D8D8/FFFFFF?text=Anh+cuoi+9_full" },
-            { src: "https://placehold.co/600x400/F0E68C/FFFFFF?text=Anh+cuoi+10", alt: "Ảnh cưới 10", fullSrc: "https://placehold.co/1200x800/F0E68C/FFFFFF?text=Anh+cuoi+10_full" }
+            // Thay đổi tại đây: Sử dụng hình ảnh DSC00317.jpg cho thumbnail đầu tiên
+            { src: "image/crop/imag1_crop.jpg", alt: "Ảnh cưới 1", fullSrc: "image/DSC00317.jpg" },
+            { src: "image/crop/image2_crop.jpg", alt: "Ảnh cưới 2", fullSrc: "image/DSC00514.jpg" },
+            { src: "image/crop/image3_crop.jpg", alt: "Ảnh cưới 3", fullSrc: "image/DSC01159.jpg" },
+            { src: "image/crop/image4_crop.jpg", alt: "Ảnh cưới 4", fullSrc: "image/DSC00818.JPG" },
+            { src: "image/DSC00763.JPG", alt: "Ảnh cưới 5", fullSrc: "image/DSC00763.JPG" },
+            { src: "image/DSC00674.jpg", alt: "Ảnh cưới 6", fullSrc: "image/DSC00674.jpg" },
+            { src: "image/DSC00852.JPG", alt: "Ảnh cưới 7", fullSrc: "image/DSC00852.JPG" },
+            { src: "image/F (114.jpg", alt: "Ảnh cưới 8", fullSrc: "image/F (114.jpg" },
+            { src: "image/F (63)fix.jpg", alt: "Ảnh cưới 10", fullSrc: "image/F (63)fix.jpg" },
+            { src: "image/F (159).jpg", alt: "Ảnh cưới 9", fullSrc: "image/F (159).jpg" },
+            
         ];
 
         let currentImageIndex = 0;
@@ -836,7 +830,7 @@
         // Hàm thêm vào lịch
         window.addToCalendar = function (eventName, location, dateTime) {
             const date = new Date(dateTime);
-            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format YYYYMMDDTHHMMSSZ
+            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format McClellanMMDDTHHMMSSZ
 
             const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${formattedDate}/${formattedDate}&details=${encodeURIComponent('Sự kiện đám cưới của Phú Tùng & Quỳnh Anh')}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
             window.open(googleCalendarUrl, '_blank');
