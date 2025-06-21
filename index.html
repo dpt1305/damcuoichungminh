@@ -425,24 +425,24 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
 
+        /* Chỉnh sửa cho phần thumbnails */
         .modal-thumbnails {
             display: flex;
-            justify-content: center;
-            padding: 8px 0; /* Giảm padding cho mobile */
+            justify-content: left;
+            padding: 0.5rem 0.75rem; /* Giảm padding ngang và thêm một ít padding dọc */
             background-color: #222;
-            /* Nền cho thumbnail */
             gap: 8px; /* Giảm gap cho mobile */
-            overflow-x: auto;
-            /* Cho phép cuộn ngang nếu nhiều thumbnail */
-            white-space: nowrap;
-            scrollbar-width: thin;
-            /* Firefox */
-            scrollbar-color: #888 #555;
-            /* Firefox */
+            overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều thumbnail */
+            white-space: nowrap; /* Ngăn không cho thumbnails xuống dòng */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #888 #555; /* Firefox */
+            width: auto; /* Đảm bảo chiếm toàn bộ chiều rộng */
+            box-sizing: border-box; /* Đảm bảo padding không làm tràn width */
+            height: 8rem;
         }
 
         .modal-thumbnails::-webkit-scrollbar {
-            height: 8px;
+            height: 8rem;
         }
 
         .modal-thumbnails::-webkit-scrollbar-track {
@@ -740,12 +740,12 @@
             { src: "image/crop/thumbnails/tn_image2_crop.jpg", alt: "Ảnh cưới 2", fullSrc: "image/thumbnails/tn_DSC00514.jpg" },
             { src: "image/crop/thumbnails/tn_image3_crop.jpg", alt: "Ảnh cưới 3", fullSrc: "image/thumbnails/tn_DSC01159.jpg" },
             { src: "image/crop/thumbnails/tn_image4_crop.jpg", alt: "Ảnh cưới 4", fullSrc: "image/thumbnails/tn_DSC00818.JPG" },
+            { src: "image/thumbnails/tn_F (159).jpg", alt: "Ảnh cưới 9", fullSrc: "image/thumbnails/tn_F (159).jpg" },
             { src: "image/thumbnails/tn_DSC00763.JPG", alt: "Ảnh cưới 5", fullSrc: "image/thumbnails/tn_DSC00763.JPG" },
             { src: "image/thumbnails/tn_DSC00674.jpg", alt: "Ảnh cưới 6", fullSrc: "image/thumbnails/tn_DSC00674.jpg" },
             { src: "image/thumbnails/tn_DSC00852.JPG", alt: "Ảnh cưới 7", fullSrc: "image/thumbnails/tn_DSC00852.JPG" },
             { src: "image/thumbnails/tn_F (114.jpg", alt: "Ảnh cưới 8", fullSrc: "image/thumbnails/tn_F (114.jpg" },
             { src: "image/thumbnails/tn_F (63)fix.jpg", alt: "Ảnh cưới 10", fullSrc: "image/thumbnails/tn_F (63)fix.jpg" },
-            { src: "image/thumbnails/tn_F (159).jpg", alt: "Ảnh cưới 9", fullSrc: "image/thumbnails/tn_F (159).jpg" },
             
         ];
 
@@ -821,7 +821,11 @@
                 thumbImg.src = image.src; // Use smaller src for thumbnail
                 thumbImg.alt = image.alt;
                 thumbItem.appendChild(thumbImg);
-                thumbItem.addEventListener('click', () => openModal(index)); // Open modal on thumbnail click
+                // When thumbnail is clicked, it should only update the main image, not re-open the modal
+                thumbItem.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    showImage(currentImageIndex);
+                });
                 modalThumbnailsContainer.appendChild(thumbItem);
             });
         }
