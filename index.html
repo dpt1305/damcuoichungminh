@@ -52,7 +52,7 @@
 
         .header-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
+            font-size: 4.5rem; /* Tối ưu hóa cho mobile */
             line-height: 1.1;
             margin-bottom: 1rem;
             opacity: 0;
@@ -63,14 +63,14 @@
         }
 
         .header-content p {
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* Tối ưu hóa cho mobile */
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
         }
 
         .section {
-            padding: 4rem 1rem;
+            padding: 2rem 1rem; /* Giảm padding cho mobile */
             max-width: 1200px;
             margin: 0 auto;
             opacity: 0;
@@ -85,9 +85,9 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 2.5rem; /* Tối ưu hóa cho mobile */
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem; /* Giảm margin cho mobile */
             color: #5C4B51;
             /* Màu chữ tiêu đề */
         }
@@ -107,7 +107,7 @@
 
         .gallery-item img {
             width: 100%;
-            height: 300px;
+            height: 250px; /* Điều chỉnh chiều cao ảnh cho mobile */
             object-fit: cover;
             display: block;
         }
@@ -116,48 +116,51 @@
             background-color: white;
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem; /* Giảm padding cho mobile */
+            margin-bottom: 1.5rem; /* Giảm margin cho mobile */
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem; /* Giảm gap cho mobile */
         }
 
         .event-card img {
             width: 100%;
-            height: 250px;
+            height: 200px; /* Điều chỉnh chiều cao ảnh cho mobile */
             object-fit: cover;
             border-radius: 0.5rem;
         }
 
         .event-details h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem; /* Tối ưu hóa cho mobile */
             margin-bottom: 0.5rem;
             color: #5C4B51;
         }
 
         .event-details p {
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Tối ưu hóa cho mobile */
         }
 
         .event-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem; /* Giảm gap cho mobile */
             flex-wrap: wrap;
+            justify-content: center; /* Căn giữa các nút trên mobile */
         }
 
         .event-buttons button {
             background-color: #B48D7D;
             /* Màu nút */
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.2rem; /* Giảm padding cho mobile */
             border-radius: 0.5rem;
             transition: background-color 0.3s ease;
             font-weight: 600;
             border: none;
             cursor: pointer;
+            flex-grow: 1; /* Cho phép nút mở rộng nếu cần */
+            min-width: 120px; /* Đảm bảo kích thước tối thiểu cho nút */
         }
 
         .event-buttons button:hover {
@@ -168,9 +171,9 @@
             background-color: white;
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem;
+            padding: 1.5rem; /* Giảm padding cho mobile */
             max-width: 700px;
-            margin: 2rem auto;
+            margin: 1.5rem auto; /* Giảm margin cho mobile */
         }
 
         .rsvp-form label {
@@ -178,6 +181,7 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: #5C4B51;
+            font-size: 0.95rem; /* Tối ưu hóa font size */
         }
 
         .rsvp-form input[type="text"],
@@ -185,18 +189,19 @@
         .rsvp-form input[type="tel"],
         .rsvp-form textarea {
             width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1.5rem;
+            padding: 0.6rem; /* Giảm padding cho mobile */
+            margin-bottom: 1rem; /* Giảm margin cho mobile */
             border: 1px solid #ddd;
             border-radius: 0.5rem;
             box-sizing: border-box;
+            font-size: 0.9rem; /* Tối ưu hóa font size */
         }
 
         .rsvp-form .radio-group {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            flex-direction: column; /* Stack radio buttons vertically on mobile */
+            gap: 0.75rem; /* Giảm gap cho mobile */
+            margin-bottom: 1rem; /* Giảm margin cho mobile */
         }
 
         .rsvp-form .radio-group div {
@@ -212,9 +217,9 @@
             background-color: #E96479;
             /* Màu hồng tương tự ảnh */
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem; /* Giảm padding cho mobile */
             border-radius: 0.5rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Tối ưu hóa font size */
             font-weight: 700;
             border: none;
             cursor: pointer;
@@ -240,6 +245,70 @@
 
             .header-content p {
                 font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 1rem; /* Khôi phục padding cho desktop */
+            }
+
+            .section-title {
+                font-size: 3rem; /* Khôi phục font size cho desktop */
+                margin-bottom: 3rem;
+            }
+
+            .gallery-item img {
+                height: 300px; /* Khôi phục chiều cao ảnh cho desktop */
+            }
+
+            .event-card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+                gap: 1.5rem;
+            }
+
+            .event-card img {
+                height: 250px;
+            }
+
+            .event-details h3 {
+                font-size: 1.8rem;
+            }
+
+            .event-details p {
+                font-size: 1.1rem;
+            }
+
+            .event-buttons {
+                justify-content: flex-start; /* Nút trái trên desktop */
+            }
+
+            .rsvp-form {
+                padding: 2.5rem;
+                margin: 2rem auto;
+            }
+
+            .rsvp-form label {
+                font-size: 1rem;
+            }
+
+            .rsvp-form input[type="text"],
+            .rsvp-form input[type="email"],
+            .rsvp-form input[type="tel"],
+            .rsvp-form textarea {
+                padding: 0.75rem;
+                margin-bottom: 1.5rem;
+                font-size: 1rem;
+            }
+
+            .rsvp-form .radio-group {
+                flex-direction: row; /* Radio buttons ngang trên desktop */
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .rsvp-form button[type="submit"] {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
             }
         }
 
@@ -271,11 +340,10 @@
             margin: auto;
             display: flex;
             flex-direction: column;
-            width: 90%;
-            height: 90%;
+            width: 95%; /* Tăng width cho mobile */
+            height: 95%; /* Tăng height cho mobile */
             max-width: 1200px;
-            max-height: 80vh;
-            /* Giới hạn chiều cao để thumbnail vừa */
+            max-height: 90vh; /* Điều chỉnh chiều cao tối đa cho mobile */
             background-color: #000;
             /* Đảm bảo nền đen như hình mẫu */
             border-radius: 0.75rem;
@@ -321,10 +389,10 @@
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 35px;
+            top: 10px; /* Điều chỉnh vị trí nút close cho mobile */
+            right: 15px; /* Điều chỉnh vị trí nút close cho mobile */
             color: #f1f1f1;
-            font-size: 40px;
+            font-size: 35px; /* Điều chỉnh kích thước nút close cho mobile */
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
@@ -346,7 +414,7 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 1rem;
+            padding: 0 0.5rem; /* Giảm padding cho mobile */
             box-sizing: border-box;
             z-index: 1000;
         }
@@ -355,8 +423,8 @@
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            font-size: 2rem;
+            padding: 0.3rem 0.8rem; /* Giảm padding cho mobile */
+            font-size: 1.8rem; /* Giảm font size cho mobile */
             cursor: pointer;
             border-radius: 0.5rem;
             transition: background-color 0.3s ease;
@@ -369,10 +437,10 @@
         .modal-thumbnails {
             display: flex;
             justify-content: center;
-            padding: 10px 0;
+            padding: 8px 0; /* Giảm padding cho mobile */
             background-color: #222;
             /* Nền cho thumbnail */
-            gap: 10px;
+            gap: 8px; /* Giảm gap cho mobile */
             overflow-x: auto;
             /* Cho phép cuộn ngang nếu nhiều thumbnail */
             white-space: nowrap;
@@ -397,8 +465,8 @@
         }
 
         .modal-thumbnail-item {
-            width: 80px;
-            height: 60px;
+            width: 70px; /* Điều chỉnh kích thước thumbnail cho mobile */
+            height: 50px; /* Điều chỉnh kích thước thumbnail cho mobile */
             overflow: hidden;
             border-radius: 5px;
             cursor: pointer;
@@ -423,23 +491,23 @@
         /* Styling for Wishes section */
         #wishesSection {
             background-color: #F8F5F0;
-            padding: 4rem 1rem;
+            padding: 2rem 1rem; /* Giảm padding cho mobile */
         }
 
         .wishes-container {
             max-width: 800px;
             margin: 0 auto;
             background-color: white;
-            padding: 2.5rem;
+            padding: 1.5rem; /* Giảm padding cho mobile */
             border-radius: 0.75rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .wish-item {
             background-color: #f9f9f9;
-            padding: 1.5rem;
+            padding: 1.2rem; /* Giảm padding cho mobile */
             border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem; /* Giảm margin cho mobile */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
@@ -450,14 +518,49 @@
         .wish-item .name {
             font-weight: 600;
             color: #5C4B51;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.4rem; /* Giảm margin cho mobile */
+            font-size: 1rem; /* Tối ưu hóa font size */
         }
 
         .wish-item .message {
             font-style: italic;
             color: #333;
             line-height: 1.5;
+            font-size: 0.95rem; /* Tối ưu hóa font size */
+        }
+
+        /* Custom alert box */
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            max-width: 90%;
+            min-width: 280px;
+            color: #333;
+        }
+
+        .custom-alert p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .custom-alert button {
+            background-color: #B48D7D;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -478,10 +581,10 @@
             "Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí."
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
-            <!-- 6 ảnh đầu tiên hiển thị mặc định -->
+            <!-- 4 ảnh đầu tiên hiển thị mặc định -->
             <div class="gallery-item">
-                <img src="https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1" alt="Ảnh cưới 1"
-                    data-full-src="https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full">
+                <img src="image/crop/F (5).jpg" alt="Ảnh cưới 1"
+                    data-full-src="image/F (5).jpg">
             </div>
             <div class="gallery-item">
                 <img src="https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2" alt="Ảnh cưới 2"
@@ -495,14 +598,7 @@
                 <img src="https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4" alt="Ảnh cưới 4"
                     data-full-src="https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full">
             </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/B5C7D7/FFFFFF?text=Anh+cuoi+5" alt="Ảnh cưới 5"
-                    data-full-src="https://placehold.co/1200x800/B5C7D7/FFFFFF?text=Anh+cuoi+5_full">
-            </div>
-            <div class="gallery-item">
-                <img src="https://placehold.co/600x400/E0E7E9/FFFFFF?text=Anh+cuoi+6" alt="Ảnh cưới 6"
-                    data-full-src="https://placehold.co/1200x800/E0E7E9/FFFFFF?text=Anh+cuoi+6_full">
-            </div>
+            <!-- Dynamic additional images can be added here if needed -->
         </div>
         <!-- Nút "Xem thêm" -->
         <div class="text-center mt-8">
@@ -529,7 +625,7 @@
                     </p>
                     <div class="event-buttons">
                         <button
-                            onclick="addToCalendar('Nhà trai', 'Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm
+                            onclick="addToCalendar('Nhà trai', 'Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trôi, Hoài Đức, Hà Nội', '2025-07-19T17:00:00')">Thêm
                             vào lịch</button>
                         <button
                             onclick="viewMap('Nhà văn hoá số 2, thôn Giang Xá, Thị Trấn Trạm Trôi, Hoài Đức, Hà Nội')">Xem
@@ -642,12 +738,12 @@
     </div>
 
     <script>
-        // Backend URL
+        // Backend URL (replace with your actual backend URL)
         const beURL = 'https://server.damcuoichungminh.site';
 
         // Global array to store image data (src, alt, full-src)
         const allImages = [
-            { src: "https://placehold.co/600x400/C5D8CD/FFFFFF?text=Anh+cuoi+1", alt: "Ảnh cưới 1", fullSrc: "https://placehold.co/1200x800/C5D8CD/FFFFFF?text=Anh+cuoi+1_full" },
+            { src: "image/crop/F (5).jpg", alt: "Ảnh cưới 1", fullSrc: "image/F (5).jpg" },
             { src: "https://placehold.co/600x400/D4BBAA/FFFFFF?text=Anh+cuoi+2", alt: "Ảnh cưới 2", fullSrc: "https://placehold.co/1200x800/D4BBAA/FFFFFF?text=Anh+cuoi+2_full" },
             { src: "https://placehold.co/600x400/9BB8CD/FFFFFF?text=Anh+cuoi+3", alt: "Ảnh cưới 3", fullSrc: "https://placehold.co/1200x800/9BB8CD/FFFFFF?text=Anh+cuoi+3_full" },
             { src: "https://placehold.co/600x400/F5D7B7/FFFFFF?text=Anh+cuoi+4", alt: "Ảnh cưới 4", fullSrc: "https://placehold.co/1200x800/F5D7B7/FFFFFF?text=Anh+cuoi+4_full" },
@@ -740,7 +836,7 @@
         // Hàm thêm vào lịch
         window.addToCalendar = function (eventName, location, dateTime) {
             const date = new Date(dateTime);
-            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format McClellanMMDDTHHMMSSZ
+            const formattedDate = date.toISOString().replace(/-|:|\.\d{3}/g, ''); // Format YYYYMMDDTHHMMSSZ
 
             const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${formattedDate}/${formattedDate}&details=${encodeURIComponent('Sự kiện đám cưới của Phú Tùng & Quỳnh Anh')}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
             window.open(googleCalendarUrl, '_blank');
@@ -802,7 +898,7 @@
 
             // Validate fullName
             if (fullName === '') {
-                alert("Vui lòng nhập tên của bạn.");
+                showCustomAlert("Vui lòng nhập tên của bạn.");
                 fullNameInput.focus();
                 return;
             }
@@ -812,7 +908,7 @@
                 // Regex for Vietnamese phone numbers (0XXXXXXXXX or +84XXXXXXXXX)
                 const phoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
                 if (!phoneRegex.test(phone)) {
-                    alert("Số điện thoại không đúng định dạng. Vui lòng nhập 10 số (bắt đầu bằng 0) hoặc định dạng +84 (ví dụ: +84901234567).");
+                    showCustomAlert("Số điện thoại không đúng định dạng. Vui lòng nhập 10 số (bắt đầu bằng 0) hoặc định dạng +84 (ví dụ: +84901234567).");
                     phoneInput.focus();
                     return;
                 }
@@ -828,13 +924,13 @@
                 }
             }
             if (!attendanceSelected) {
-                alert("Vui lòng chọn bạn sẽ tham dự tiệc cưới nhà trai hay nhà gái.");
+                showCustomAlert("Vui lòng chọn bạn sẽ tham dự tiệc cưới nhà trai hay nhà gái.");
                 return;
             }
 
             // Validate message
             if (message === '') {
-                alert("Vui lòng nhập lời chúc của bạn.");
+                showCustomAlert("Vui lòng nhập lời chúc của bạn.");
                 messageInput.focus();
                 return;
             }
@@ -856,48 +952,30 @@
                 const result = await response.json();
                 console.log("Backend response:", result);
 
-                alert("Cảm ơn bạn đã xác nhận tham gia! Thông tin của bạn đã được gửi thành công.");
+                showCustomAlert("Cảm ơn bạn đã xác nhận tham gia! Thông tin của bạn đã được gửi thành công.");
                 this.reset(); // Reset form after successful submission
                 fetchWishes(); // Tải lại lời chúc sau khi gửi thành công
             } catch (error) {
                 console.error("Error submitting RSVP:", error);
-                alert("Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại.");
+                showCustomAlert("Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại.");
             }
         });
 
         // Thay thế alert bằng một modal hoặc popup đẹp hơn
-        window.alert = function (message) {
+        function showCustomAlert(message) {
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) {
+                existingAlert.remove(); // Remove existing alert to prevent duplicates
+            }
+
             const alertBox = document.createElement('div');
-            alertBox.style.position = 'fixed';
-            alertBox.style.top = '50%';
-            alertBox.style.left = '50%';
-            alertBox.style.transform = 'translate(-50%, -50%)';
-            alertBox.style.backgroundColor = 'white';
-            alertBox.style.padding = '20px 30px';
-            alertBox.style.borderRadius = '10px';
-            alertBox.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
-            alertBox.style.zIndex = '1000';
-            alertBox.style.textAlign = 'center';
-            alertBox.style.fontFamily = 'Inter, sans-serif';
-            alertBox.style.maxWidth = '90%';
-            alertBox.style.minWidth = '280px';
-            alertBox.style.color = '#333';
+            alertBox.className = 'custom-alert';
 
             const p = document.createElement('p');
             p.textContent = message;
-            p.style.marginBottom = '15px';
-            p.style.fontSize = '1.1rem';
-            p.style.color = '#333';
 
             const closeButton = document.createElement('button');
             closeButton.textContent = 'Đóng';
-            closeButton.style.backgroundColor = '#B48D7D';
-            closeButton.style.color = 'white';
-            closeButton.style.padding = '10px 20px';
-            closeButton.style.border = 'none';
-            closeButton.style.borderRadius = '5px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.style.fontSize = '1rem';
             closeButton.addEventListener('click', () => {
                 document.body.removeChild(alertBox);
             });
@@ -905,7 +983,7 @@
             alertBox.appendChild(p);
             alertBox.appendChild(closeButton);
             document.body.appendChild(alertBox);
-        };
+        }
 
         // Hiệu ứng cuộn để hiện ra nội dung
         document.addEventListener('DOMContentLoaded', () => {
