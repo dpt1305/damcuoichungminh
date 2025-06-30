@@ -1,0 +1,31 @@
+@layer theme, base, antd, components, utilities;
+@import "tailwindcss";
+
+:root {
+  --background: #F8F5F0;
+  --foreground: #171717;
+}
+
+@media (width < 48rem) {
+  :root {
+    --fcc-digit-block-width: 35px !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.ant-app {
+  font-family: 'Gentium Plus' !important;
+}
+
+.see-more-btn {
+  background-color: transparent;
+  background-image: linear-gradient(transparent, white 95%);
+}
