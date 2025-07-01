@@ -142,23 +142,41 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
           <div className="relative">
-            <Image src="/blessing_container.svg" alt="Groom blessing" width={400} height={400} />
+            <Image
+              src="/blessing_container.svg"
+              alt="Groom blessing"
+              width={0}
+              height={0}
+              className="w-80 h-80 md:w-90 md:h-90 lg:w-100 lg:h-100"
+            />
             <div className="absolute top-1/7 left-7/20 flex flex-col items-center">
-              <span className="text-xl mb-6">Mừng cưới chú rể</span>
-              <Image src="/groom_blessing.svg" alt="Groom blessing" width={150} height={150} />
+              <span className="text-sm md:text-base lg:text-xl mb-6">Mừng cưới chú rể</span>
+              <Image
+                src="/groom_blessing.svg"
+                alt="Groom blessing"
+                width={0}
+                height={0}
+                className="w-30 h-30 md:w-33 md:h-33 lg:w-37.5 lg:h-37.5"
+              />
             </div>
           </div>
           <div className="relative">
             <Image
               src="/blessing_container.svg"
               alt="Groom blessing"
-              width={400}
-              height={400}
-              className="transform-[scaleX(-1)]"
+              width={0}
+              height={0}
+              className="w-80 h-80 md:w-90 md:h-90 lg:w-100 lg:h-100 transform-[scaleX(-1)]"
             />
             <div className="absolute top-1/7 right-7/20 flex flex-col items-center">
-              <span className="text-xl mb-6">Mừng cưới cô dâu</span>
-              <Image src="/bribe_blessing.svg" alt="Bribe blessing" width={150} height={150} />
+              <span className="text-sm md:text-base lg:text-xl mb-6">Mừng cưới cô dâu</span>
+              <Image
+                src="/bribe_blessing.svg"
+                alt="Bribe blessing"
+                width={0}
+                height={0}
+                className="w-30 h-30 md:w-33 md:h-33 lg:w-37.5 lg:h-37.5"
+              />
             </div>
           </div>
         </div>
